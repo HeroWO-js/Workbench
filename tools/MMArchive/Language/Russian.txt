@@ -1,0 +1,158 @@
+	[TRSLodEdt]
+GlobalCharset	RUSSIAN_CHARSET
+SDeleteQuestion	Вы уверены, что хотите удалить "%s" из архива?
+SDeleteManyQuestion	Вы уверены, что хотите удалить выделенные файлы из архива?
+SNewFolder	Новая папка
+SExtractAs	Экспортировать как...
+SExtractTo	Экспортировать в...
+SEPaletteNotFound	Не найдена подходящая палитра в bitmaps.lod
+SEPaletteMustExist	Изображение должно содержать 256 цветов и палитра должна быть добавлена в bitmaps.lod
+SPalette	Палитра: %d
+SPaletteChanged	Палитра: %d (показана: %d)
+SFavorites	Избранное
+SRenameOverwriteQuestion	Файл с именем "%s" уже существует. Хотите его перезаписать?
+SExtractOverwriteFileQuestion	Следующие файлы уже существуют. Хотите их перезаписать?
+SExtractOverwriteDirQuestion	Следующие папки уже существуют. Хотите их перезаписать?
+SPleaseWaitRebuilding	Подождите, архив пересобирается...
+SPleaseWait	Подождите...
+RSSpeedButton1.Hint	Растянуть
+RSSpeedButton2.Hint	Проигрывать
+OpenDialog1.Filter	Архивы Might&Magic или Heroes 3 (*.lod; *.lwd; *.snd; *.vid; *.mm6; *.mm7; *.dod; *.pac)|*.lod;*.lwd;*.snd;*.vid;*.mm6;*.mm7;*.dod;*.pac|Все файлы|*.*
+OpenDialogMerge.Filter	Архивы Might&Magic или Heroes 3 (*.lod; *.lwd; *.snd; *.vid; *.mm6; *.mm7; *.dod; *.pac)|*.lod;*.lwd;*.snd;*.vid;*.mm6;*.mm7;*.dod;*.pac|Все файлы|*.*
+SaveDialogSaveSelectionAs.Filter	Архивы Might&Magic или Heroes 3 (*.lod; *.lwd; *.snd; *.vid; *.mm6; *.mm7; *.dod; *.pac)|*.lod;*.lwd;*.snd;*.vid;*.mm6;*.mm7;*.dod;*.pac|Все файлы|*.*
+SaveDialogSaveSelectionAs.Title	Создать архив из выбранных файлов
+SaveSelectionAsArchive1.Caption	Создать архив из выбранных файлов
+AddFolder1.Caption	Создать папку
+AddFile1.Caption	Добавить файл
+MergeFavorites1.Caption	Добавить Избранное из...
+Cut1.Caption	&Вырезать
+Copy1.Caption	&Копировать
+Copy2.Caption	&Копировать
+Copy3.Caption	&Копировать
+Paste1.Caption	Вст&авить
+Paste2.Caption	Вст&авить
+Paste3.Caption	Вст&авить
+Delete1.Caption	&Удалить
+Delete2.Caption	&Удалить
+Delete3.Caption	&Удалить
+Rename1.Caption	Переименовать
+Rename2.Caption	Переименовать
+Rename3.Caption	Переименовать
+Extract1.Caption	Экспортировать
+AddtoFavorites1.Caption	Добавить в Избранное
+OpenDialog2.Filter	Избранное (*.lf)|*.lf|Все файлы|*.*
+File1.Caption	Файл
+New1.Caption	Новый
+Open1.Caption	Открыть
+RecentFiles1.Caption	Недавние документы
+Exit1.Caption	Выход
+Edit1.Caption	Редактировать
+Add1.Caption	Добавить...
+Extract2.Caption	Экспортировать
+Rebuild1.Caption	Оптимизировать
+AddtoFavorites2.Caption	Добавить в Избранное
+Def1.Caption	Def
+OriginalPalette1.Caption	Палитра дефа
+NormalPalette1.Caption	Стандартная палитра
+TransparentBackground1.Caption	Прозрачный фон
+ShowAll1.Caption	Все типы
+Spells1.Caption	Заклинания
+ShowCreatures1.Caption	Монстры
+ShowMapObjects1.Caption	Объекты карты
+ShowHeroes1.Caption	Герои
+ShowTerrain1.Caption	Почвы
+ShowCursors1.Caption	Курсоры
+ShowInterface1.Caption	Интерфейс
+ShowCombatHeroes1.Caption	Герои в битве
+Palette1.Caption	Палитра
+Default1.Caption	По умолчанию
+FirstKind1.Caption	Первый тип
+SecondKind1.Caption	Второй тип
+ThirdKind1.Caption	Третий тип
+Options1.Caption	Опции
+Sortbyextension1.Caption	Сортировать по расширению
+Backup1.Caption	Бэкап оригинальных файлов
+IgnoreUnpackingErrors1.Caption	Игнорировать ошибки распаковки
+Language1.Caption	Язык
+Associate1.Caption	Ассоциировать с *.lod
+Associate2.Caption	Ассоциировать с *.snd
+Associate3.Caption	Ассоциировать с *.vid
+Associate4.Caption	Ассоциировать с *.pac
+Associate5.Caption	Ассоциировать с *.lwd
+Help1.Caption	Справка
+SaveDialogExport.Filter	Все файлы|*.*
+SaveDialogExport.Title	Экспорт
+OpenDialogImport.Filter	Все файлы|*.*
+OpenDialogImport.Title	Добавить файлы
+SaveDialogNew.Filter	Любой архив Heroes 3 (*.lod; *.snd; *.vid; *.pac)|*.lod;*.snd;*.vid;*.pac|LOD-архив Heroes 3 (*.lod; *.pac)|*.lod;*.pac|Архив звуков Heroes 3 (*.snd)|*.snd|Архив звуков MM (*.snd)|*.snd|Архив видео Heroes 3 или MM 7-8 (*.vid)|*.vid|Архив видео MM 6 (*.vid)|*.vid|Архив Bitmaps для MM (*.lod;*.lwd)|*.bitmaps.lod;*.lod;*.lwd|Архив Icons для MM (*.lod)|*.lod|Архив Sprites для MM (*.lod)|*.lod|Архив English для MM 8 (*.lod)|*.lod|Архив Games для MM 7-8 (*.lod)|*.lod|Архив Games для MM 6 (*.lod)|*.lod|Сохранённая игра MM 7-8 (*.lod;*.mm7;*.dod)|*.lod;*.mm7;*.dod|Сохранённая игра MM 6 (*.lod;*.mm6)|*.lod;*.mm6|Все файлы|*.*
+SaveDialogNew.Title	Новый архив
+OpenDialogBitmapsLod.Title	Выберите архив bitmaps.lod
+MergeWith1.Caption	Соединить с архивом...
+OpenDialogMerge.Title	Выберите архив, содержимое которого надо добавить
+CompareTo1.Caption	Сравнить с...
+OpenDialogCompare.Title	Выберите архив для сравнения
+CommonExtractionFolder1.Caption	Единая папка для сохранения файлов
+CopyName1.Caption	Скопировать имя
+ExtractForDefTool1.Caption	Распаковать для DefTool...
+ExtractForDefTool2.Caption	Распаковать для DefTool...
+ExtractWithExternalShadow1.Caption	Распаковывать тень отдельно
+ExtractIn24Bits1.Caption	Распаковывать в 24 битах
+StoreAsText1.Caption	Файл Избранного в текстовом формате
+MoveUp1.Caption	Сдвинуть вверх
+MoveDown1.Caption	Сдвинуть вниз
+SortByName1.Caption	Сортировать по имени
+SortTreeByName1.Caption	Сортировать всё дерево по имени
+Select1.Caption	Выбрать
+ComboExtFilter.Hint	Фильтр по расширению
+Button1.Caption	OK
+Button2.Caption	Отмена
+
+	[Help]
+GlobalCharset	RUSSIAN_CHARSET
+EditsCharset	RUSSIAN_CHARSET
+Memo1.Text	MMArchive v%VERSION%
+(c) Sergey Rozhenko
+http://sites.google.com/site/sergroj/
+sergroj@mail.ru
+
+Данная программа может редактировать любые архивы Might&Magic 6-8 и Heroes 3, кроме *.hwl.
+Здесь я объясню лишь самые неочевидные особенности программы и её использования.
+
+Двойной щелчок по окну просмотра расширит его, чтобы полностью вместить изображение.
+
+
+[ Оптимизация архивов ]
+Замена и удаление файлов приводят к фрагментации архива и увеличению его размера. Если архив стал слишком большим, нажмите кнопку "Оптимизировать", чтобы уменьшить его размер до минимума.
+Если вы меняете архив .vid, оптимизация особенно важна. Не используйте другие програмы для работы с архивом, пока не оптимизируете его. Причина: Из-за того, что архивы .vid не содержат информацию о размерах файлов, MMArchive дописывает её в конец архива. Другие программы, конечно, не воспринимают её и будут считать размер файлов в архиве более большим.
+
+
+[ Соединить с архивом ]
+Команда "Соединить с архивом" добавляет в текущий архив все файлы из другого архива. Добавляемые файлы записываются поверх существующих при совпадении имён.
+
+
+[ Добавление файлов ]
+Для добавления файлов используйте кнопку "Добавить" или перетаскивайте файлы в окно программы.
+У Героев в h3bitmap.lod картинки имеют расширение ".pcx", но вы можете использовать обычные bmp'шки - программа сама их переименует в ".pcx".
+
+Для добавления картинок в архивы M&M всегда используйте расширение ".bmp". У битмапок в M&M всегда 256 цветов. Когда вы добавляете картинку в icons.lod, программа сама переводит её в 256 цветов, но для хорошего качества лучше делать это в профессиональном графическом редакторе.
+При добавлении картинок в sprites.lod и bitmaps.lod может выскочить сообщение об ошибке, связанной с палитрой. Причина в том, что в sprites.lod картинки не содержат палитр, а хранят только номер палитры, соответствующий файлу "PAL*" из bitmaps.lod. Картинки в bitmaps.lod, хоть и хранят в себе палитру, тоже обязаны содержать номер палитры "PAL*". Таким образом, для каждой картинки из этих двух архивов, в bitmaps.lod должна существовать соответствующая палитра. Перед тем, как добавлять картинку, палитра которой отличается от существующих, вы должны добавить её палитру в bitmaps.lod под свободным номером. Программа найдет эту палитру, когда вы будете добавлять картинку.
+Насчет расширения: если вы работали с mm8leveleditor, то знаете, что он использует расширения ".sprite.bmp", ".tga.bmp", ".4tga.0.bmp" - ".4tga.3.bmp". MMArchive всегда использует ".bmp". Уменьшенные картинки ".4tga.1.bmp" - ".4tga.3.bmp" он создает автоматически.
+
+Чтобы дабавить палитру, возьмите битмапку и переименуйте её в палитру без расширения - например, "PAL722". Затем добавляйте её как обычно. Так же вы можете добавлять палитры в формате ".act".
+С палитрами есть еще одна проблема. Карта может одновременно использовать только 50 палитр. В MMExtension я снял это ограничение (по умолчанию теперь можно использовать 200 палитр на карту и это число можно поставить любым), но всё-равно желательно использовать общую палитру для картинок с близкой цветовой гаммой, если вы хотите использовать их на одной карте.
+
+
+[ Спрайты монстров в M&M ]
+Со спрайтами монстров сложнее. У них есть 3 палитры, которые указаны в файле dsft.bin. Обычно их номера идут следующими после палитры, указанной для спрайтов в sprites.lod. Вы можете их посмотреть, выбрав в меню Палитра. Вот несколько советов, как создавать монстра:
+
+Самый простой способ:
+Отрендерите кадры для одного варианта монстра, переведите их в 256 цветов с общей палитрой с цветом фона на первой позиции (вы можете сделать это с помощью DefTool v2: http://sites.google.com/site/sergroj/wog/DefTool2.rar?attredirects=0). Сохраните один кадр под именем первой палитры.
+Затем вам надо сделать еще 2 палитры. Для этого возьмите один кадр и измените его с помощью таких эффектов, как Оттенок/Насыщенность/Яркость (Hue/Saturation/Brightness) и Яркость/Контраст (Brightness/Contrast). Эти эффекты меняют только палитру, не влияя на то, каким точкам присвоены какие номера цветов. Сделайте так 2 палитры - и все готово. Добавляйте все это в sprites.lod.
+
+Самый интересный способ:
+1 набор кадров + 3 палитры - это самоограничение NWC, позволяющее уменьшить потребности в памяти, размер sprite.lod и ускорить загрузку. Основную пользу это приносит в режиме программной отрисовки, а в режиме аппаратного 3D разница мала. Вам не обязательно соблюдать это ограничение. Вы можете создать 3 варианта модели монстра, которые могут различаться не только цветами, но и формой - чем угодно. Считайте, что это 3 разных монстра - отрендерите их под разными именами, сконвертируйте каждого к своей палитре (так же, с помощью DefTool v2 или подобным способом). Затем добавьте их в sprites.lod и измените Data\Tables\SFT.txt, который создаёт MMExtension. Свяжитесь со мной или Владимиром Maestro, чтобы получить утилиту, упрощающую процесс. Ваш мод, скорее всего, будет требовать установку моего патча, потому что он убирает ограничения на количество загружаемых спрайтов и размер виртуальной памяти M&M.
+
+Самый сложный способ:
+Если вы посмотрите на монстров, выбрав "По умолчанию" в меню "Палитра", то поймете, как их рендерили в NWC. Большинство имеют область, которая не меняется, и несколько областей, меняющих цвет. Эти области не имеют между собой общих цветов.
+
+Caption	Справка

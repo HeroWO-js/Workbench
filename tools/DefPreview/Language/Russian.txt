@@ -1,0 +1,89 @@
+	[Help]
+Caption	Справка Def Preview
+GlobalCharset	RUSSIAN_CHARSET
+EditsCharset	RUSSIAN_CHARSET
+Memo1.Lines.Strings	Автор: Роженко Сергей
+http://www.grayface.chat.ru
+sergroj@mail.ru
+
+
+1)   При выделении группы показывается ее анимация.
+2)   Номера групп картинок можно менять, выделив группу и кликнув еще раз.
+3)   Тип дефа в строке состояния можно изменить, кликнув на него.
+4)   Пункт "Загрузить номера групп" копирует номера групп из другого дефа
+
+
+
+
+Особая благодарность Александру Карпеко
+
+	[Main Form]
+GlobalCharset	RUSSIAN_CHARSET
+SGroup	Группа
+SWrongCompression	Ошибка: Сжатие не соответствует типу
+SUnusedType	(неиспользуемый тип)
+
+File1.Caption	Файл
+Open1.Caption	Открыть
+SaveAs1.Caption	Сохранить как...
+Exit1.Caption	Выход
+Edit1.Caption	Правка
+ExportPictures1.Caption	Экспорт Картинок
+ExportDefList1.Caption	Создать DefList для DefMaker'а
+ExtractAll1.Caption	Распаковать все для DefTool
+LoadGroupsNumbers1.Caption	Загрузить номера групп
+Options1.Caption	Опции
+Stretch1.Caption	Растянуть
+Transparent1.Caption	Прозрачный фон
+NoShadow1.Caption	Убрать тень и обводку
+Language1.Caption	Язык
+Associate1.Caption	Ассоциировать с файлами .def
+Help1.Caption	Справка
+N40Sprite1.Caption	$4&0 Заклинание
+
+N42Creature1.Caption	$4&2 Монстр
+N43Advobj1.Caption	$4&3 Объект на карте
+N44Hero1.Caption	$4&4 Герой
+N45Tileset1.Caption	$4&5 Почва
+N46Pointer1.Caption	$4&6 Курсор
+N47Interface1.Caption	$4&7 Интерфейс
+
+N49CombatHero1.Caption	$4&9 Герой в драке
+StatusBar1.Panels.0.Text	Ширина
+StatusBar1.Panels.2.Text	Высота
+StatusBar1.Panels.4.Text	Тип
+StatusBar1.Panels.6.Text	Сжатие
+StatusBar1.Panels.8.Text	Кадр
+Groups42.Items.Strings	Движение
+Кривляние
+Стоит
+Повреждения
+Защита
+Смерть
+Неиспользуемая Смерь
+Поворот Влево
+Поворот Вправо
+Поворот Влево
+Поворот Вправо
+Атака Вверх
+Атака Прямо
+Атака Вниз
+Выстрел Вверх
+Выстрел Прямо
+Выстрел Вниз
+Атака на 2 клетки Вверх
+Атака на 2 клетки Прямо
+Атака на 2 клетки Вниз
+Начало Движения
+Конец Движения
+Groups44.Items.Strings	Вверх
+Вверх-Вправо
+Вправо
+Вниз-Вправо
+Вниз
+Идет Вверх
+Идет Вверх-Вправо
+Идет Вправо
+Идет Вниз-Вправо
+Идет Вниз
+
