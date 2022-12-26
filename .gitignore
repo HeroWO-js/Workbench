@@ -1,0 +1,29 @@
+/databanks/
+/maps/
+/BIK-APNG/
+/BIK-WAV-OGG/
+/BMP/
+/BMP-PNG/
+/CDROM-BIK-WAV-OGG/
+/DEF/
+/DEF-extracted/
+/DEF-PNG/
+/H3M/
+/MP3/
+/WAV/
+/WAV-OGG/
+/WAV-PCM/
+
+/api.sqlite
+/config.php
+/Export Defmaker DefList.ahk
+/Extract All for DefTool.ahk
+/Extract Pictures.ahk
+
+/tools/minify.exe
+/tools/Node.exe
+/tools/DefPreview/*.ahk
+/tools/DefPreview/AutoHotkey*.exe
+/tools/DefPreview/DefPreview.ini
+/tools/MMArchive/Favorites/
+/tools/MMArchive/MMArchive.ini

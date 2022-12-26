@@ -1,0 +1,48 @@
+
+	[Help]
+Memo1.Text	MMArchive v%VERSION%
+(c) Sergey Rozhenko
+http://sites.google.com/site/sergroj/
+sergroj@mail.ru
+
+With this program you can edit any archive of Might&Magic 6-8 or Heroes 3, except *.hwl.
+Here I'll explain the most unobvious things about the program and its use.
+
+A double click on preview window will expand it to fit the image size.
+
+
+[ Optimizing archives ]
+When you replace or delete files, it causes archive fragmentation and increase in archive size. If your archive grows too large, use the "Optimize" button to decrease archive size to minimum.
+If you change a .vid archive, optimization is especially important. Don't use any other tools until you optimize the archive. Here's the reason why. Because .vid archives lack information about files sizes, MMArchive writes it at the end of archive. Other tools won't recognize it. They'll think files are bigger than they actually are.
+
+
+[ Merge With ]
+"Merge With" command adds into current archive all files from another archive. Added files replace existing files with the same name.
+
+
+[ Adding files ]
+You can use "Add" button or drag files on MMArchive window to add them.
+In h3bitmap.lod of Heroes 3 pictures have ".pcx" extension, but you can use bitmaps instead. The program will rename them to ".pcx" automatically.
+
+To add images to M&M archives always use simple ".bmp" extension. Bitmaps in M&M always have 256 colors. If you add a bitmap into icons.lod MMArchive will convert it to 256 colors.
+When you add pictures into sprites.lod or bitmaps.lod you may see an error message about their palettes. That's because images in sprites.lod don't have palettes in them, instead they contain a pelette number that refers to "PAL*" file in bitmaps.lod. Bitmaps in bitmaps.lod, dispite having their own palettes, also refer to a "PAL*" index. This means that each bitmap in these archives must have corresponding palette added to bitmaps.lod.
+So, If you have an image with new a palette, you must first add the new palette into bitmaps.lod with some unused palette index. The program will automatically find the palette when you add bitmaps.
+Note: mm8leveleditor uses extensions ".sprite.bmp", ".tga.bmp", ".4tga.0.bmp" - ".4tga.3.bmp". MMArchive always uses ".bmp". Zoom levels ".4tga.1.bmp" - ".4tga.3.bmp" are generated automatically, so you shouldn't worry about them.
+
+To add a palette you should take a bitmap with this palette and rename it under the name of palette you need, WITHOUT extension (e.g. "PAL722"). Then you can import it as usual. You can also import palettes in ".act" format.
+There's another problem with palettes. Originally only 50 palettes could be used in a map. I've removed this limitation in MMExtension (it's changed to 200 there and can be set to any number), but it's still a good idea to reuse palettes for bitmaps with similar colors that are gonna be used together on one level.
+
+
+[ Monster sprites in M&M ]
+Monster sprites are special. They have 3 palettes which are specified in dsft.bin file. Usually their palette numbers are subsequent to palette specified for their sprites in sprites.lod. You can select them in Palette menu. Here are some tips of how to make a monster:
+
+The easiest way:
+Render frames of your monster as one variation, convert them into 256 colors with a common palette for them with background color at the first index (you can do this with DefTool v2: http://sites.google.com/site/sergroj/wog/DefTool2.rar?attredirects=0). Save one of the frames under the name of first palette.
+Then you'll need to make two more palettes. To do this you change one frame using effects like Hue/Saturation/Brightness and Brightness/Contrast. These effects should only change palette, not changing palette indexes assigned to pixels of bitmap, at least in Corel Photo-Paint. Make another palette this way and you're done. Import all the things.
+
+The most interesting way:
+1 set of frames + 3 palettes is a self-limitation of NWC used to reduce virtual memory demands, size of sprite.lod and loading times. All these benefits mostly apply to software rendering. You don't have to adhere to these limitations. You can make 3 variations of monster model. They can defer by color, shape, anything. Think of them as of 3 different monsters - render them under different names, convert each into 256 colors with separate palettes (again, with DefTool v2 or a similar approach). Then import them and change Data\Tables\SFT.txt (it's created by MMExtension). Contact me or Vladimir Maestro to get a tool that will help you with the process. Your mod will probably require my patch installed, because it removes limits on number of loaded sprites and on amount of virtual memory M&M games can use.
+
+The hardest way:
+If you look at monsters with Default chosen in Palette menu, you'll get the idea of how NWC rendered them. Mostly, they have one area that doesn't change color between variations and one or more areas that do change color. All these areas don't have any similar colors.
+

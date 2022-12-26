@@ -1,0 +1,17 @@
+	[Help]
+Caption	Def Preview Help
+Memo1.Lines.Strings	Def Preview v%VERSION%
+Author: Sergey Rozhenko
+http://sites.google.com/site/sergroj/
+sergroj@mail.ru
+
+
+1)   When you select a group you can preview it's animation.
+2)   You can change groups' names by selecting them and clicking on them again.
+3)   You can change type of def by clicking on it in status bar.
+4)   "Load Groups Numbers" copies groups' numbers from another def file
+
+
+
+
+Special Thanks to Alexander Karpeko
