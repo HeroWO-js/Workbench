@@ -21,10 +21,16 @@ Do not use GitHub's code download function because the archive it generates lack
 Instead, open Command Prompt, `cd` into your web server's document root (typically `/var/www` on \*nix, `C:\xampp\htdocs` on Windows) and type this:
 
 ```
-git clone --recurse-submodules git@github.com:HeroWO-js/Workbench.git
+git clone --recurse-submodules https://github.com/HeroWO-js/Workbench.git
 ```
 
-Alternatively, if you have installed **TortoiseGit**: open Explorer, right-click on the document root or on any folder inside it, call `Git Clone...`, paste `git@github.com:HeroWO-js/Workbench.git` into `URL`, tick `Recursive`, leave other settings at their defaults and click OK.
+Alternatively, if you have installed **TortoiseGit**: open Explorer, right-click on the document root or on any folder inside it, call `Git Clone...`, paste `https://github.com/HeroWO-js/Workbench.git` into `URL`, tick `Recursive`, leave other settings at their defaults and click OK.
+
+The above does an anonymous checkout. If you have an account on GitHub, use this URL instead:
+
+```
+git@github.com:HeroWO-js/Workbench.git
+```
 
 ## Check the structure
 
