@@ -652,14 +652,14 @@ function minify($urlPrefix = null) {
 //  14. def2png.php DEF-extracted DEF-PNG -p BMP\PLAYERS.PAL -b BMP-PNG
 //  15. Run adpcm2pcm on each WAV (output to WAV-PCM)
 //  16. Run oggenc or oggenc2 on each WAV-PCM (output to WAV-OGG)
-//  17. Generate databank:
+//  17. Generate databank (add -s LANG):
 //      php -d memory_limit=1G
 //        databank.php -p -t BMP -g core/databank/shapes.json
 //        -d DEF-PNG -du ../../DEF-PNG/
 //        -a MP3 -a WAV-OGG -au ../../
 //        -b BMP-PNG/bitmap.css -bu ../../BMP-PNG/
 //        -v sod databanks
-//  18. Generate maps:
+//  18. Generate maps (add -s LANG):
 //      php h3m2herowo.php -d databanks/sod -M -ih H3M/Tutorial.tut maps
 //      php -d memory_limit=3G h3m2herowo.php -d databanks/sod -M -ew H3M maps
 //
@@ -699,8 +699,9 @@ function checkFileCopies($src, $srcExt, $dest, $destExt) {
     );
 
     $missing and printf('%s(...) ', trim(substr(join(' ', $missing), 0, 30), '(). '));
-    return !$missing;
   }
+
+  return empty($missing);
 }
 
 function run(array $args, array $rawArgs = []) {
@@ -792,6 +793,7 @@ function h3m2herowo($input, array $arguments = []) {
       $input,
       'maps',
       '-d', 'databanks/'.currentDatabank(),
+      '-s', config('charset'),
     ],
     $arguments,
     // -ew -s RU ...
@@ -1391,6 +1393,31 @@ function do_wav2ogg() {
   }
 }
 
+function done_charset() {
+  return config('charset') !== null;
+}
+
+function do_charset() {
+  require_once 'core/databank/h3m2json/h3m2json.php';
+
+  printf("=> What is the interface language of your HoMM 3 version?%s", PHP_EOL);
+  printf(PHP_EOL);
+  printf("   This also sets the language of non-English maps in H3M%s.%s", DIRECTORY_SEPARATOR, PHP_EOL);
+  printf(PHP_EOL);
+  printf("   You'll be able to convert maps in other languages separately: update.php some%smap.h3m -s LANG%s", DIRECTORY_SEPARATOR, PHP_EOL);
+  printf(PHP_EOL);
+
+  do {
+    printf('   Type one of %s, then press Enter, or just press Enter for English (en): ',
+      join(' ', array_keys(HeroWO\H3M\CLI::$charsets)));
+    $s = strtolower(trim(readSTDIN()));
+    $s === '' and $s = 'en';
+  } while (!isset(HeroWO\H3M\CLI::$charsets[$s]));
+
+  config('charset', HeroWO\H3M\CLI::$charsets[$s]);
+  return true;
+}
+
 function done_databank() {
   return checkFiles('databanks/'.currentDatabank().'/', [
     'combined.json',
@@ -1403,7 +1430,7 @@ function done_databank() {
 
 function do_databank() {
   if (!pending('bmp') and !pending('bmp2png') and !pending('mp3') and
-      !pending('wav2ogg') and !pending('def2png')) {
+      !pending('wav2ogg') and !pending('def2png') and !pending('charset')) {
     $cmd = <<<CMD
 -d memory_limit=1G
 core/databank/databank.php
@@ -1415,6 +1442,7 @@ CMD;
 
     $cmd = array_merge([true], preg_split('/\\s+/', $cmd), [
       '-v', currentDatabank(), 'databanks',
+      '-s', config('charset'),
     ]);
 
     return run($cmd);
@@ -1454,25 +1482,7 @@ function done_tutorial() {
 }
 
 function do_tutorial() {
-  if (!pending('databank') and !pending('h3m')) {
-    if (config('h3m2herowo') === null) {
-      require_once 'core/databank/h3m2json/h3m2json.php';
-
-      printf("=> What language your HoMM 3 maps are in? Maps in English and in this one other language will be held in H3M%s.%s", DIRECTORY_SEPARATOR, PHP_EOL);
-      printf(PHP_EOL);
-      printf("   You'll be able to convert maps in other languages separately: update.php some%smap.h3m -s LANG%s", DIRECTORY_SEPARATOR, PHP_EOL);
-      printf(PHP_EOL);
-
-      do {
-        printf('   Type one of %s, then press Enter, or just press Enter for English (en): ',
-          join(' ', array_keys(HeroWO\H3M\CLI::$charsets)));
-        $s = strtolower(trim(readSTDIN()));
-        $s === '' and $s = 'en';
-      } while (!isset(HeroWO\H3M\CLI::$charsets[$s]));
-
-      config('h3m2herowo', $s === 'en' ? [] : ['-s', $s]);
-    }
-
+  if (!pending('databank') and !pending('h3m') and !pending('charset')) {
     return h3m2herowo('H3M/Tutorial.tut', ['-ew', '-ih']);
   }
 }
@@ -1505,7 +1515,8 @@ function done_maps() {
 
 function do_maps() {
   global $SKIP_PENDING;
-  if (!pending('databank') and !pending('h3m') and !pending('tutorial')) {
+  if (!pending('databank') and !pending('h3m') and !pending('tutorial') and
+      !pending('charset')) {
     return h3m2herowo('H3M', empty($SKIP_PENDING) ? ['-nx', '-ei'] : ['-ei']);
   }
 }
