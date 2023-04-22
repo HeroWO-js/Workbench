@@ -859,6 +859,23 @@ function do_bmp() {
 ECHO;
 }
 
+// Non-TXTs in BMP/ are considered intermediate; if user supplies all
+// non-intermediate files (e.g. BMP-PNG) then no need to ask for extracting
+// H3bitmap.lod as long as text files are present.
+function done_bmpTXT() {
+  return checkFiles('BMP/', [
+    'GENRLTXT.TXT',
+    'CRBANKS.TXT',
+    'BLDGNEUT.TXT',
+    'HEROBIOS.TXT',
+    'SKILLLEV.TXT',
+  ]);
+}
+
+function do_bmpTXT() {
+  return do_bmp();
+}
+
 function done_bmp2png() {
   return checkFiles('BMP-PNG/', [
     'bitmap.css',
@@ -1429,7 +1446,7 @@ function done_databank() {
 }
 
 function do_databank() {
-  if (!pending('bmp') and !pending('bmp2png') and !pending('mp3') and
+  if (!pending('bmpTXT') and !pending('bmp2png') and !pending('mp3') and
       !pending('wav2ogg') and !pending('def2png') and !pending('charset')) {
     $cmd = <<<CMD
 -d memory_limit=1G
