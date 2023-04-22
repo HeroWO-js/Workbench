@@ -149,6 +149,7 @@ function folders($flag = null) {
     'DEF-extracted'     => ['create' => true, 'remove' => true],
     'BMP-PNG'           => [],
     'DEF-PNG'           => [],
+    'TXT-en'            => [],
     'WAV-OGG'           => [],
     // The following are not currently handled by update.php (see do_bik()).
     'BIK-APNG'          => [],
@@ -628,38 +629,42 @@ function minify($urlPrefix = null) {
 //   1. Run MMArchive, extract H3bitmap.lod to BMP
 //   2. Run MMArchive, extract H3sprite.lod to DEF
 //   3. Run MMArchive, extract Heroes3.snd to WAV
-//   4. Copy content of MP3  folder from the game's folder to MP3 in Workbench
-//   5. Copy content of Maps folder from the game's folder to H3M in Workbench
-// * 6. Generate custom DEFs:
+//   4. If converting data of a non-English HoMM 3:
+//      run MMArchive, extract *.txt from H3bitmap.lod to TXT-en
+//   5. Copy content of MP3  folder from the game's folder to MP3 in Workbench
+//   6. Copy content of Maps folder from the game's folder to H3M in Workbench
+// * 7. Generate custom DEFs:
 //      a. cd custom-graphics\DEF ; php gen.php (correct paths in the template)
 //      b. Run H3DefTool, open each HDL, press Make Def
 //      c. Copy produced DEFs to DEF
-//   7. Run DefPreview, call these commands on each DEF in DEF\ in order
+//   8. Run DefPreview, call these commands on each DEF in DEF\ in order
 //      (output to DEF-extracted; can automate using the provided AHK script):
 //      a. Extract All for DefTool
 //      b. Extract Picture(s)
 //      c. Export Defmaker DefList
-// * 8. Use Photoshop or another tool to convert each frame (bitmap) in
+// * 9. Use Photoshop or another tool to convert each frame (bitmap) in
 //      CRADVNTR.DEF, CRCOMBAT.DEF and CRDEFLT.DEF to .cur; output to
 //      core\custom-graphics\DEF-CUR (\CRADVNTR\CursrA00.cur, etc.)
-// * 9. cur-hotspot.php DEF-CUR\CRADVNTR
+// *10. cur-hotspot.php DEF-CUR\CRADVNTR
 //      cur-hotspot.php DEF-CUR\CRCOMBAT
 //      cur-hotspot.php DEF-CUR\CRDEFLT
-// *10. CMNUMWIN2png.php BMP\CMNUMWIN.BMP core\custom-graphics\CMNUMWIN
-//  11. bmp2png.php BMP BMP-PNG
-// *12. Run potrace to generate .geojson from BMPs as described in bmp2shape.php
-// *13. bmp2shape.php -b BMP -g BMP-geojson -o core\databank\shapes.json
-//  14. def2png.php DEF-extracted DEF-PNG -p BMP\PLAYERS.PAL -b BMP-PNG
-//  15. Run adpcm2pcm on each WAV (output to WAV-PCM)
-//  16. Run oggenc or oggenc2 on each WAV-PCM (output to WAV-OGG)
-//  17. Generate databank (add -s LANG):
+// *11. CMNUMWIN2png.php BMP\CMNUMWIN.BMP core\custom-graphics\CMNUMWIN
+//  12. bmp2png.php BMP BMP-PNG
+// *13. Run potrace to generate .geojson from BMPs as described in bmp2shape.php
+// *14. bmp2shape.php -b BMP -g BMP-geojson -o core\databank\shapes.json
+//  15. def2png.php DEF-extracted DEF-PNG -p BMP\PLAYERS.PAL -b BMP-PNG
+//  16. Run adpcm2pcm on each WAV (output to WAV-PCM)
+//  17. Run oggenc or oggenc2 on each WAV-PCM (output to WAV-OGG)
+//  18. Generate databank:
 //      php -d memory_limit=1G
 //        databank.php -p -t BMP -g core/databank/shapes.json
 //        -d DEF-PNG -du ../../DEF-PNG/
 //        -a MP3 -a WAV-OGG -au ../../
 //        -b BMP-PNG/bitmap.css -bu ../../BMP-PNG/
 //        -v sod databanks
-//  18. Generate maps (add -s LANG):
+//      If converting data of a non-English HoMM 3, add:
+//        -s CHARSET -ti TXT-en
+//  19. Generate maps (add -s LANG to both if needed):
 //      php h3m2herowo.php -d databanks/sod -M -ih H3M/Tutorial.tut maps
 //      php -d memory_limit=3G h3m2herowo.php -d databanks/sod -M -ew H3M maps
 //
@@ -859,21 +864,51 @@ function do_bmp() {
 ECHO;
 }
 
+define('TXT_FILES', [
+  'GENRLTXT.TXT',
+  'CRBANKS.TXT',
+  'BLDGNEUT.TXT',
+  'HEROBIOS.TXT',
+  'SKILLLEV.TXT',
+]);
+
 // Non-TXTs in BMP/ are considered intermediate; if user supplies all
 // non-intermediate files (e.g. BMP-PNG) then no need to ask for extracting
 // H3bitmap.lod as long as text files are present.
 function done_bmpTXT() {
-  return checkFiles('BMP/', [
-    'GENRLTXT.TXT',
-    'CRBANKS.TXT',
-    'BLDGNEUT.TXT',
-    'HEROBIOS.TXT',
-    'SKILLLEV.TXT',
-  ]);
+  return checkFiles('BMP/', TXT_FILES);
 }
 
 function do_bmpTXT() {
   return do_bmp();
+}
+
+function done_txtEn() {
+  return checkFiles('TXT-en/', TXT_FILES);
+}
+
+function do_txtEn() {
+  $ds = DIRECTORY_SEPARATOR;
+  $txt = __DIR__.DIRECTORY_SEPARATOR.'TXT-en';
+  is_dir($txt) or mkdir($txt);
+  echo <<<ECHO
+
+Need original English text files to pair data of a localized HoMM 3 version.
+
+=>  1. Run tools{$ds}MMArchive{$ds}MMArchive.exe
+    2. Call File > Open
+    3. Navigate to the folder with installed English (!) HoMM 3
+    4. Navigate to Data subfolder
+    5. Select H3bitmap.lod, then click Open
+    6. Optional: click on the extension filter under the menu and select ".txt"
+    7. Click on any file name in the large list on the right (e.g. ADVEVENT.TXT)
+    8. Press Ctrl+A to select everything
+    9. Call Edit > Extract To...
+   10. Navigate into TXT-en subfolder in Workbench (below), then click Save:
+       $txt
+   11. Run update.php again
+
+ECHO;
 }
 
 function done_bmp2png() {
@@ -1447,7 +1482,8 @@ function done_databank() {
 
 function do_databank() {
   if (!pending('bmpTXT') and !pending('bmp2png') and !pending('mp3') and
-      !pending('wav2ogg') and !pending('def2png') and !pending('charset')) {
+      !pending('wav2ogg') and !pending('def2png') and !pending('charset') and
+      ($eng = !strcasecmp(config('charset'), 'cp1250') or !pending('txtEn'))) {
     $cmd = <<<CMD
 -d memory_limit=1G
 core/databank/databank.php
@@ -1457,10 +1493,15 @@ core/databank/databank.php
 -b BMP-PNG/bitmap.css -bu ../../BMP-PNG/
 CMD;
 
-    $cmd = array_merge([true], preg_split('/\\s+/', $cmd), [
-      '-v', currentDatabank(), 'databanks',
-      '-s', config('charset'),
-    ]);
+    $cmd = array_merge(
+      [true],
+      preg_split('/\\s+/', $cmd),
+      [
+        '-v', currentDatabank(), 'databanks',
+        '-s', config('charset'),
+      ],
+      $eng ? [] : ['-ti', 'TXT-en']
+    );
 
     return run($cmd);
   }

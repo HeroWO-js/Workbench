@@ -26,7 +26,7 @@ git clone --recurse-submodules https://github.com/HeroWO-js/Workbench.git
 
 Alternatively, if you have installed **TortoiseGit**: open Explorer, right-click on the document root or on any folder inside it, call `Git Clone...`, paste `https://github.com/HeroWO-js/Workbench.git` into `URL`, tick `Recursive`, leave other settings at their defaults and click OK.
 
-The above does an anonymous checkout. If you have an account on GitHub, use this URL instead:
+The above does an anonymous checkout. If you have an account on GitHub, use this URL:
 
 ```
 git@github.com:HeroWO-js/Workbench.git
@@ -66,3 +66,10 @@ On Windows, you may be able to just double-click `update.php` to run it. Or clic
 Follow the script's interactive instructions to finish configuring your local environment (or run `update.php -h` for options). It may take a while, be patient even if nothing seems to be happening on screen!
 
 Instructions for manual convertion are found in `update.php`'s source code, `convertH3Data()` function's comment.
+
+## Fast track
+
+1. Clone this repository to a directory, say **X**
+2. Download contents of the torrent file found in [herowo.io/dl](https://herowo.io/dl) to **X** (so you get `X/BMP/OBJECTS.TXT`, etc.)
+    * The torrent with intermediate data is useful only if you're planning to tinker with modifications
+3. Run `update.php`
