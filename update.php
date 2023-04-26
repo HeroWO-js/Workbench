@@ -104,11 +104,21 @@ if (checkPhpExtensions() and
     printf(PHP_EOL) and
     removeTemporary() and
     $finished = true) {
+  $url = '';
+
+  if (isXAMPP()) {
+    $root = substr(php_ini_loaded_file(), 0, 2).'\\xampp\\htdocs\\';
+    if (!strncasecmp(__DIR__, $root, strlen($root))) {
+      $url = sprintf(PHP_EOL.'| %-57s |',
+        'http://127.0.0.1/'.strtr(substr(__DIR__, strlen($root)), '\\', '/').'/core/');
+    }
+  }
+
   echo <<<ECHO
  ___________________________________________________________
 |                                                           |
 |         HeroWO Workbench Initialized Successfully         |
-| Open core/index.php in your web browser to start the game |
+| Open core/index.php in your web browser to start the game |$url
 |___________________________________________________________|
 
 ECHO;
@@ -242,6 +252,10 @@ function currentDatabank() {
   return keyValue('databank');
 }
 
+function isXAMPP() {
+  return stripos(php_ini_loaded_file(), '\\xampp\\php\\php.ini') !== false;
+}
+
 function checkPhpExtensions() {
   $extensions = [
     'gd' => 'convert HoMM 3 images',
@@ -281,7 +295,7 @@ function checkPhpExtensions() {
 
     printf(PHP_EOL);
     printf('You should enable missing extensions in PHP. Press Enter to exit.%s', PHP_EOL);
-    if ($ini = stripos(php_ini_loaded_file(), '\\xampp\\php\\php.ini') !== false) {
+    if ($ini = isXAMPP()) {
       printf(PHP_EOL);
       printf('Type "x" to try enabling them in XAMPP automatically.', PHP_EOL);
     }
@@ -864,19 +878,17 @@ function do_bmp() {
 ECHO;
 }
 
-define('TXT_FILES', [
-  'GENRLTXT.TXT',
-  'CRBANKS.TXT',
-  'BLDGNEUT.TXT',
-  'HEROBIOS.TXT',
-  'SKILLLEV.TXT',
-]);
-
 // Non-TXTs in BMP/ are considered intermediate; if user supplies all
 // non-intermediate files (e.g. BMP-PNG) then no need to ask for extracting
 // H3bitmap.lod as long as text files are present.
-function done_bmpTXT() {
-  return checkFiles('BMP/', TXT_FILES);
+function done_bmpTXT($dir = 'BMP') {
+  return checkFiles("$dir/", [
+    'GENRLTXT.TXT',
+    'CRBANKS.TXT',
+    'BLDGNEUT.TXT',
+    'HEROBIOS.TXT',
+    'SKILLLEV.TXT',
+  ]);
 }
 
 function do_bmpTXT() {
@@ -884,7 +896,7 @@ function do_bmpTXT() {
 }
 
 function done_txtEn() {
-  return checkFiles('TXT-en/', TXT_FILES);
+  return done_bmpTXT('TXT-en');
 }
 
 function do_txtEn() {
@@ -960,14 +972,13 @@ function done_defCustom() {
 }
 
 function do_defCustom() {
-  if (!pending('def')) {
-    foreach (scandir($path = 'core/custom-graphics/DEF') as $file) {
-      if (!strcasecmp(substr($file, -4), '.def')) {
-        copy("$path/$file", "DEF/$file");
-      }
+  foreach (scandir($path = 'core/custom-graphics/DEF') as $file) {
+    if (!strcasecmp(substr($file, -4), '.def')) {
+      copy("$path/$file", "DEF/$file");
     }
-    return true;
   }
+
+  return true;
 }
 
 function done_defExtracted() {
@@ -1283,7 +1294,7 @@ function do_def2png() {
 
     $count = min($count - 1, 12);
 
-    if ($count > 0) {
+    if ($count > 1) {
       printf('=> Your CPU seems to have %d cores. DEF convertion may take over an hour if done in a single thread. We can launch up to %d copies of def2png.php to speed it up.%s', $count + 1, $count, PHP_EOL);
       printf(PHP_EOL);
       printf("   Launching more than one copy %s, and update.php will quit. You'll have to watch when all of them exit, and restart update.php.%s", WINDOWS ? 'will create multiple console windows' : 'will start several background& tasks managed by your shell (with intermixing outputs)', PHP_EOL);

@@ -24,7 +24,7 @@ Instead, open Command Prompt, `cd` into your web server's document root (typical
 git clone --recurse-submodules https://github.com/HeroWO-js/Workbench.git
 ```
 
-Alternatively, if you have installed **TortoiseGit**: open Explorer, right-click on the document root or on any folder inside it, call `Git Clone...`, paste `https://github.com/HeroWO-js/Workbench.git` into `URL`, tick `Recursive`, leave other settings at their defaults and click OK.
+Alternatively, if you have installed **TortoiseGit**: open Explorer, right-click on the web server's document root or on any folder inside it, call `Git Clone...`, paste `https://github.com/HeroWO-js/Workbench.git` into `URL`, tick `Recursive`, leave other settings at their defaults and click OK.
 
 The above does an anonymous checkout. If you have an account on GitHub, use this URL:
 
@@ -73,3 +73,12 @@ Instructions for manual convertion are found in `update.php`'s source code, `con
 2. Download contents of the torrent file found in [herowo.io/dl](https://herowo.io/dl) to **X** (so you get `X/BMP/OBJECTS.TXT`, etc.)
     * The torrent with intermediate data is useful only if you're planning to tinker with modifications
 3. Run `update.php`
+
+## Other considerations
+
+Default Apache caching may get in the way of debugging. You can turn it off by adding the following lines to the configuration file (such as `/etc/apache2/apache2.conf` or `C:\xampp\apache\conf\httpd.conf`) and restarting Apache:
+
+```
+Header unset Last-Modified
+Header unset Etag
+```
