@@ -29,7 +29,7 @@ if (count($argv) > 1) {
 
   $arg = $argv[1];
 
-  if ($arg === '-h') {
+  if ($arg === '-h' or $arg === '/?') {
     // Help, help...
   } elseif (count($argv) === 2 and
             (isset($targets[$target = strtolower($arg)]) or
@@ -51,7 +51,7 @@ if (count($argv) > 1) {
 Interactively update everything:
   update.php
 Show this help text:
-  update.php -h
+  update.php -h | /?
 Interactively update specific target, ignoring prerequisites:
   update.php TARGET
 Convert specific HoMM 3 map to maps$ds:
@@ -618,8 +618,9 @@ function minify($urlPrefix = null) {
   }
 
   if (isset($urlPrefix)) {
-    // combined.json includes audio.json that uses -au.
-    $mask = 'databanks/*/{combined.css,herowo.min.css,combined.json}';
+    // XXX combined.json includes audio.json that uses -au but not processing
+    // this file here because databankURL() doesn't recognized absolute URLs.
+    $mask = 'databanks/*/{combined.css,herowo.min.css}';
     foreach (glob($mask, GLOB_NOSORT | GLOB_BRACE | GLOB_ERR) as $file) {
       writeFile($file, str_replace('../../', $urlPrefix, file_get_contents($file)));
     }
