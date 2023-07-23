@@ -67,14 +67,31 @@ Follow the script's interactive instructions to finish configuring your local en
 
 Instructions for manual convertion are found in `update.php`'s source code, `convertH3Data()` function's comment.
 
+## Freshen up
+
+The `core` subfolder isn't automatically kept up to date with the latest changes in the game engine. Type this:
+
+```
+git -C core pull
+```
+
+Alternatively, on Windows with **TortoiseGit** right-click on `core`, call `Pull` and click OK.
+
 ## Fast track
 
 1. Clone this repository to a directory, say **X**
 2. Download contents of the torrent file found in [herowo.io/dl](https://herowo.io/dl) to **X** (so you get `X/BMP/OBJECTS.TXT`, etc.)
     * The torrent with intermediate data is useful only if you're planning to tinker with modifications
 3. Run `update.php`
+4. Pull `core`
 
 ## Other considerations
+
+List of maps and some other features require that an API server is running. Start it by typing this (close the terminal window to stop):
+
+```
+php core/api.php watchdog
+```
 
 Default Apache caching may get in the way of debugging. You can turn it off by adding the following lines to the configuration file (such as `/etc/apache2/apache2.conf` or `C:\xampp\apache\conf\httpd.conf`) and restarting Apache:
 

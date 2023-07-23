@@ -698,9 +698,12 @@ function convertH3Data() {
 }
 
 function checkFiles($base, array $expected) {
-  $missing = array_filter($expected, function ($file) use ($base) {
-    return !is_file($base.$file);
-  });
+  $missing = [];
+
+  foreach ($expected as $file) {
+    WINDOWS or $file = strtr($file, '\\', DIRECTORY_SEPARATOR);
+    is_file($base.$file) or $missing[] = $file;
+  }
 
   $missing and printf('%s(...) ', trim(substr(join(' ', $missing), 0, 30), '(). '));
   return !$missing;
@@ -1249,26 +1252,26 @@ function done_def2png() {
     'AH00_E\purpleOwner-0-0.png',
     'AH00_E\texture.json',
 
-    'AVGERTH0\0-1.png',
-    'AVGERTH0\animation.css',
-    'AVGERTH0\button.css',
-    'AVGERTH0\def.css',
-    'AVGERTH0\redOwner-0-7.png',
-    'AVGERTH0\texture.json',
+    'AVGerth0\0-1.png',
+    'AVGerth0\animation.css',
+    'AVGerth0\button.css',
+    'AVGerth0\def.css',
+    'AVGerth0\redOwner-0-7.png',
+    'AVGerth0\texture.json',
 
-    'AVWHALF\0-21.png',
-    'AVWHALF\animation.css',
-    'AVWHALF\button.css',
-    'AVWHALF\def.css',
-    'AVWHALF\texture.json',
+    'AVWhalf\0-21.png',
+    'AVWhalf\animation.css',
+    'AVWhalf\button.css',
+    'AVWhalf\def.css',
+    'AVWhalf\texture.json',
 
-    'IAM002\0-2.png',
-    'IAM002\animation.css',
-    'IAM002\button.css',
-    'IAM002\def.css',
-    'IAM002\pink-0-0.png',
-    'IAM002\tan-0-3.png',
-    'IAM002\texture.json',
+    'iam002\0-2.png',
+    'iam002\animation.css',
+    'iam002\button.css',
+    'iam002\def.css',
+    'iam002\pink-0-0.png',
+    'iam002\tan-0-3.png',
+    'iam002\texture.json',
   ]);
 }
 
